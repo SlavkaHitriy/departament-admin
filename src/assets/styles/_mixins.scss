@@ -1,0 +1,13 @@
+@mixin btn {
+    font-size: 16px;
+    background-color: blue;
+    padding: 8px 25px;
+    text-align: center;
+}
+
+@mixin centerElement {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
