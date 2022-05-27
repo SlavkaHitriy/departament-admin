@@ -9,7 +9,7 @@ import './assets/styles/general.scss'
 import './assets/styles/app.scss'
 
 const client = new ApolloClient({
-    uri: 'https://graphql.slivki-cat.com',
+    uri: 'http://localhost:5000/graphql',
     cache: new InMemoryCache(),
 })
 

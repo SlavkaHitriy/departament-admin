@@ -2,14 +2,13 @@ import gql from "graphql-tag"
 
 export const GET_NEWS = gql`
     query {
-        getNews {
+        news {
             id
             title
             description
             content
             dateTime
             imageStorageUrl
-            imageName
         }
     }
 `

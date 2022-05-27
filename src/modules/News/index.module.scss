@@ -1,0 +1,139 @@
+@import '../../assets/styles/vars';
+@import '../../assets/styles/mixins';
+
+.news {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 100px 50px;
+}
+
+.newsItem {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: calc(100% + 50px);
+        left: -15px;
+        width: calc(100% + 30px);
+        height: 2px;
+        background-color: $primary;
+        border-radius: 2px;
+    }
+
+    &:first-child, &:nth-child(2) {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.newsItemImg {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+.newsItemContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.newsItemTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.newsItemDescription {
+    color: $grayDarkest;
+    text-align: justify;
+    letter-spacing: .6px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.newsItemDate {
+    text-align: right;
+    margin-top: auto;
+    color: $grayDark;
+}
+
+.newsItemActions {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $white;
+    box-shadow: 0 -3px 3px rgba($grayDark, .05);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    transition: all .1s;
+    height: 0;
+    padding: 0;
+}
+
+.newsItemActionsInner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all .15s;
+}
+
+.newsItemActionsActive {
+    height: 100px;
+    padding: 15px 20px;
+
+    .newsItemActionsInner {
+        opacity: 1;
+    }
+}
+
+.newsItemActionsBtn {
+    padding: 10px 15px;
+    position: relative;
+    flex-grow: 1;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+
+    &:hover {
+        color: $primary;
+    }
+
+    svg {
+        width: 30px;
+        height: 30px;
+        margin-right: 15px;
+    }
+
+    & + & {
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background-color: rgba($grayDark, .3);
+        }
+    }
+}
+
+.newsItemActionsBtnDelete {
+    &:hover {
+        color: $red;
+    }
+}
