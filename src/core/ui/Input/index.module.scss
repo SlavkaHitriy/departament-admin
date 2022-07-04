@@ -1,0 +1,65 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.inputWrapper {
+    width: 100%;
+    position: relative;
+
+    & + & {
+        margin-top: 40px;
+    }
+}
+
+.inputWrapperError {
+    .input, .inputTextarea {
+        border-color: $red;
+    }
+}
+
+.input {
+    width: 100%;
+    background-color: $white;
+    border: 1px solid $gray;
+    border-radius: 10px;
+    padding: 20px 25px;
+    font-size: 16px;
+}
+
+.inputDisabled {
+    pointer-events: none;
+    background-color: $gray;
+}
+
+.inputTextarea {
+    @extend .input;
+    resize: none;
+    height: 200px;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $gray;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $primary;
+    }
+}
+
+.inputError {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5px);
+    color: $red;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.inputLabel {
+    display: block;
+    color: $grayDark;
+    font-weight: 400;
+    margin-bottom: 10px;
+}

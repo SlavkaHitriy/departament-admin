@@ -1,32 +1,53 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { Link } from 'react-router-dom'
-
-// Store
-import routingStore from '../../../store/routing'
+import { Link, useNavigate } from 'react-router-dom'
 
 // Styles
 import styles from './index.module.scss'
 
 // Utils
-import { changeRoute } from '../../../utils/changeRoute'
+import { deleteCookie } from '../../../utils/cookie'
 
-export const Header = observer(() => {
+// Store
+import { AuthStore } from '../../../store'
+
+// Components
+import { Btn } from '../Btn'
+
+export const Header = observer(({title, addNew, account}) => {
+    const navigate = useNavigate()
+
+    const logout = async () => {
+        await fetch(`http://localhost:5000/logout`, {
+            method: 'POST',
+        })
+
+        deleteCookie('access_role')
+        AuthStore.setIsAuth(false)
+        navigate('/login')
+    }
+
     return (
         <header className={styles.header}>
             <h1 className={styles.headerTitle}>
-                {routingStore.activeName}
+                {title}
             </h1>
             {
-                routingStore.activePage === '/news' && (
+                addNew && (
                     <Link
                         className={styles.headerAddNew}
                         to={'/add-new'}
-                        onClick={() => changeRoute('/add-new', 'Додати новину')}
                     >
                         <div className={styles.headerAddNewPlus} />
                         Додати новину
                     </Link>
+                )
+            }
+            {
+                account && (
+                    <Btn className={styles.headerLogout} onClick={logout} red>
+                        Вийти з облікового запису
+                    </Btn>
                 )
             }
         </header>

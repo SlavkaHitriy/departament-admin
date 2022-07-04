@@ -1,0 +1,17 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.editor {
+    margin: 40px 0;
+}
+
+.editorLabel {
+    display: block;
+    color: $grayDark;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.editorContent {
+
+}

@@ -19,7 +19,32 @@
 }
 
 .asideItem {
+    & + & {
+        margin-top: 40px;
+    }
+}
+
+.asideItemActive {
+    &::before {
+        height: 50px;
+    }
+}
+
+.asideLink {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    color: $white;
+    font-size: 20px;
+    font-weight: 700;
     position: relative;
+
+    img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        margin-right: 25px;
+    }
 
     &::before {
         content: '';
@@ -35,18 +60,18 @@
         height: 0;
     }
 
-    & + & {
-        margin-top: 40px;
-    }
-
     &:hover {
         &::before {
             height: 25px;
         }
     }
+
+    & + .asideNestingLink {
+        margin-top: 5px;
+    }
 }
 
-.asideItemActive {
+.asideLinkActive {
     &::before {
         height: 50px;
     }
@@ -58,15 +83,45 @@
     }
 }
 
-.asideLink {
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
+.asideNestingLink {
+    margin-left: 70px;
+    padding: 5px;
     color: $white;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 14px;
+    display: inline-block;
+    position: relative;
 
-    img {
-        margin-right: 25px;
+    &::after {
+        content: '';
+        position: absolute;
+        top: calc(100% + 5px);
+        right: 5px;
+        height: 1px;
+        border-radius: 2px;
+        background-color: $white;
+        transition: all .15s;
+        width: 0;
+    }
+
+    &:hover {
+        &::after {
+            width: calc(100% - 80px);
+        }
+    }
+
+    & + & {
+        margin-top: 15px;
+    }
+}
+
+.asideNestingLinkActive {
+    &::after {
+        width: calc(100% - 10px);
+    }
+
+    &:hover {
+        &::after {
+            width: calc(100% - 10px);
+        }
     }
 }

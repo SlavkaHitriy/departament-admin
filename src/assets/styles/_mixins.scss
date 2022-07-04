@@ -1,13 +1,30 @@
-@mixin btn {
-    font-size: 16px;
-    background-color: blue;
-    padding: 8px 25px;
-    text-align: center;
-}
+@import './vars';
 
 @mixin centerElement {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+@mixin bg($size: contain) {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: $size;
+}
+
+@mixin form {
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: calc(100% + 100px);
+        top: -25px;
+        width: 3px;
+        height: calc(100% + 50px);
+        background-color: $gray;
+    }
 }

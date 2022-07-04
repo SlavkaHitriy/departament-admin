@@ -1,0 +1,27 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.newAcc {
+
+}
+
+.newAccForm {
+    max-width: 600px;
+}
+
+.newAccBtn {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.newAccPass {
+    margin-top: 40px;
+    font-size: 20px;
+
+    span {
+        color: $primary;
+        font-weight: 700;
+        display: inline-block;
+        margin-left: 10px;
+    }
+}

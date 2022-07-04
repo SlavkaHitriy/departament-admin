@@ -1,6 +1,27 @@
-@import '../../assets/styles/vars';
-@import '../../assets/styles/mixins';
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
 
 .addNew {
 
+}
+
+.addNewForm {
+    @include form;
+}
+
+.addNewUpload {
+    margin: 40px 0;
+}
+
+.addNewActions {
+    display: flex;
+    align-items: center;
+}
+
+.addNewActionsBtn {
+    width: 50%;
+
+    & + & {
+        margin-left: 30px;
+    }
 }

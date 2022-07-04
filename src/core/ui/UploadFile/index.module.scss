@@ -1,0 +1,82 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.upload {
+
+}
+
+.uploadTitle {
+    display: block;
+    color: $grayDark;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.uploadWrapper {
+    padding: 17px 15px 17px 40px;
+    border: 1px solid $gray;
+    border-radius: 10px;
+    background-color: $white;
+    display: inline-block;
+    font-size: 16px;
+    color: $primary;
+    cursor: pointer;
+    transition: all .15s;
+    position: relative;
+
+    &:hover {
+        background-color: $gray;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 30px;
+        @include bg();
+        background-image: url(../../../assets/images/upload.svg);
+    }
+}
+
+.uploadPreview {
+    max-width: 320px;
+    height: 180px;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    margin-top: 30px;
+}
+
+.uploadInp {
+    display: none;
+}
+
+.uploadInner {
+    display: flex;
+}
+
+.uploadRemove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: $white;
+    border: 1px solid $gray;
+    margin-left: 15px;
+    transition: all .15s;
+
+    &:hover {
+        background-color: $gray;
+    }
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}

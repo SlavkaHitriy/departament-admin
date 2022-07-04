@@ -1,0 +1,90 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.pagination {
+    margin: 75px 0;
+}
+
+.paginationList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginationItem {
+    & + & {
+        margin-left: 15px;
+    }
+}
+
+.paginationLink {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: $primary;
+    font-weight: 600;
+    transition: all .15s;
+    user-select: none;
+
+    svg {
+        width: 24px;
+        height: 13px;
+    }
+
+    use {
+        fill: $primary;
+        transition: all .15s;
+    }
+
+    &:hover {
+        background-color: $primary;
+        color: $white;
+
+        use {
+            fill: $white;
+        }
+    }
+}
+
+.paginationLinkDisabled {
+    border-color: $grayDark;
+    color: $grayDark;
+    pointer-events: none;
+
+    use {
+        fill: $grayDark;
+    }
+}
+
+.paginationLinkActive {
+    background-color: $primary;
+    color: $white;
+    pointer-events: none;
+
+    use {
+        fill: $grayDark;
+    }
+}
+
+.paginationItemSeparator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: $primary;
+        display: block;
+
+        & + span {
+            margin-left: 5px;
+        }
+    }
+}

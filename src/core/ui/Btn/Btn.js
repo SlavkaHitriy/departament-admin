@@ -1,12 +1,22 @@
 import React from 'react'
+import cn from 'classnames'
 
-const Btn = () => {
+// Styles
+import styles from './index.module.scss'
 
+export const Btn = ({children, type, onClick, className, red, disable}) => {
     return (
-        <div>
-
-        </div>
+        <button
+            className={cn({
+                [styles.btn]: true,
+                [className]: className,
+                [styles.btnRed]: red,
+                [styles.btnDisabled]: disable,
+            })}
+            type={type}
+            onClick={onClick}
+        >
+            {children}
+        </button>
     )
 }
-
-export default Btn

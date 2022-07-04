@@ -1,0 +1,27 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.editNew {
+
+}
+
+.editNewForm {
+    @include form;
+}
+
+.editNewUpload {
+    margin: 40px 0;
+}
+
+.editNewActions {
+    display: flex;
+    align-items: center;
+}
+
+.editNewActionsBtn {
+    width: 50%;
+
+    & + & {
+        margin-left: 30px;
+    }
+}

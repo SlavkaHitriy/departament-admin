@@ -1,0 +1,22 @@
+@import './vars';
+
+.codex-editor__redactor {
+    background-color: $white;
+    max-width: unset;
+    border-radius: 10px;
+    border: 1px solid $gray;
+    padding: 15px 20px !important;
+}
+
+.codex-editor--narrow .codex-editor__redactor {
+    margin: 0;
+}
+
+.codex-editor--narrow .ce-toolbar__actions {
+    right: unset;
+    left: calc(100% + 10px);
+}
+
+.cdx-notify__cross::after, .cdx-notify__cross::before {
+    left: 4px;
+}

@@ -1,0 +1,75 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.notifications {
+    position: fixed;
+    right: 50px;
+    z-index: 10;
+    top: 50px;
+}
+
+.notificationsItem {
+    width: 275px;
+    padding: 7px 15px;
+    border-radius: 10px;
+    color: $white;
+    display: flex;
+    align-items: center;
+    animation: showItem .5s forwards;
+    font-weight: 600;
+
+    & + & {
+        margin-top: 10px;
+    }
+
+    @keyframes showItem {
+        0% {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.notificationsItemIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: $white;
+    margin-right: 15px;
+    flex-shrink: 0;
+
+    svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .notificationsIconError {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.notificationsItemLoading {
+    background-color: $primary;
+}
+
+.notificationsItemGreen {
+    background-color: $green;
+}
+
+.notificationsItemRed {
+    background-color: $red;
+}
