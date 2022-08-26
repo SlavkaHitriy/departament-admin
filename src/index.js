@@ -10,7 +10,7 @@ import './assets/styles/app.scss'
 import './assets/styles/editor.scss'
 
 const client = new ApolloClient({
-    uri: 'http://localhost:5000/graphql',
+    uri: 'https://department-api-002.azurewebsites.net/graphql',
     cache: new InMemoryCache(),
 })
 

@@ -27,7 +27,7 @@ export const Account = () => {
 
     const createAcc = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/${inputEmail.value}/password`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/${inputEmail.value}/password`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -19,7 +19,11 @@ export const Aside = observer(({login}) => {
                 {name: 'Додати новину', route: '/add-new'},
             ]
         },
-        {name: 'Викладачі', route: '/teachers', icon: teachers},
+        {name: 'Викладачі', route: '/teachers', icon: teachers,
+            nesting: [
+                {name: 'Додати викладача', route: '/add-teacher'},
+            ]
+        },
         {name: 'Обліковий запис', route: '/account', icon: account,
             nesting: [
                 {name: 'Додати обліковий запис', route: '/new-account'},

@@ -25,7 +25,7 @@ export const DeleteAccount = () => {
     const [errors, setErrors] = useState({})
 
     const logout = async () => {
-        await fetch(`http://localhost:5000/logout`, {
+        await fetch(`${process.env.REACT_APP_API_HOST}/logout`, {
             method: 'POST',
         })
 
@@ -36,7 +36,7 @@ export const DeleteAccount = () => {
 
     const deleteAcc = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/${inputEmail.value}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/${inputEmail.value}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

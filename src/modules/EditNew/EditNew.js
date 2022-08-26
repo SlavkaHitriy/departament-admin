@@ -23,6 +23,7 @@ import { Btn } from '../../core/ui/Btn'
 import { Form } from '../../core/ui/Form'
 import { useInput } from '../../core/hooks/useInput'
 import { checkErrors } from '../../core/functions/checkErrors'
+import { RichTextEditor } from '../../core/ui/RichTextEditor'
 
 export const EditNew = () => {
     const navigate = useNavigate()
@@ -38,7 +39,7 @@ export const EditNew = () => {
 
     const inputName = useInput('')
     const inputDesc = useInput('')
-    const textareaDesc = useInput('')
+    const [fullDescContent, setFullDescContent] = useState({})
     const [haveInitPicture, setHaveInitPicture] = useState(false)
     const [file, setFile] = useState()
 
@@ -50,20 +51,32 @@ export const EditNew = () => {
             setNewInfo(data.news[0])
             inputName.setNewValue(data.news[0].title)
             inputDesc.setNewValue(data.news[0].description)
-            textareaDesc.setNewValue(data.news[0].content)
+            setFullDescContent({blocks: JSON.parse(data.news[0].content)})
 
-            if (data.news[0].imageStorageUrl)
+            if (data.news[0].headerImageStorageUrl)
                 setHaveInitPicture(true)
         }
     }, [data])
 
     const editNew = async () => {
         const loadingID = uuidv4()
+        const headerImageData = {}
 
-        if (file)
+        if (file) {
             NotificationsStore.addNotification(loadingID, 'loading', 'Збереження змін')
 
-        const res = await fetch(`http://localhost:5000/EditedNews?id=${id}&title=${inputName.value}&description=${inputDesc.value}&content=${textareaDesc.value}&deletePicture=${(!file && !haveInitPicture) && true}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_HOST}/UploadNewsImage?IsHeaderImage=${true}`, {
+                method: 'POST',
+                body: file,
+            })
+
+            const data = await res.json()
+
+            headerImageData.url = encodeURIComponent(data.file.url)
+            headerImageData.imageName = data.file.imageName
+        }
+
+        const res = await fetch(`${process.env.REACT_APP_API_HOST}/EditedNews?id=${id}&title=${inputName.value}&description=${inputDesc.value}&content=${encodeURIComponent(JSON.stringify(fullDescContent.blocks))}&deletePicture=${(!file && !haveInitPicture) && true}${headerImageData.url ? `&HeaderImageStorageUrl=${headerImageData.url}` : ''}${headerImageData.imageName ? `&HeaderImageName=${headerImageData.imageName}` : ''}`, {
             method: 'PUT',
             body: file,
         })
@@ -90,7 +103,7 @@ export const EditNew = () => {
         const inputsInfo = [
             {el: inputName, errorName: 'newName', errorText: 'Введіть назву новини'},
             {el: inputDesc, errorName: 'shortDesc', errorText: 'Введіть короткий опис'},
-            {el: textareaDesc, errorName: 'fullDesc', errorText: 'Введіть опис'},
+            {el: fullDescContent, object: true, errorName: 'fullDesc', errorText: 'Введіть опис'},
         ]
 
         if (checkErrors(setErrors, inputsInfo)) return
@@ -111,12 +124,13 @@ export const EditNew = () => {
                             <Input type={'text'} label={'Назва новини'} id={'newName'} {...inputName} error={errors.newName}/>
                             <Input type={'text'} label={'Короткий опис'} id={'shortDesc'} {...inputDesc}
                                    error={errors.shortDesc}/>
-                            <Input label={'Детальний опис'} id={'fullDesc'} textarea {...textareaDesc} error={errors.fullDesc}/>
+                            <RichTextEditor label={'Детальний опис'} error={errors.fullDesc} initData={{blocks: JSON.parse(newInfo.content)}}
+                                            setContent={setFullDescContent}/>
                             <UploadFile
                                 className={styles.editNewUpload}
                                 label={'Прикріпити фото'}
                                 setFile={setFile}
-                                initSrc={newInfo.imageStorageUrl}
+                                initSrc={newInfo.headerImageStorageUrl}
                                 setHaveInitPicture={setHaveInitPicture}
                             />
                             <div className={styles.editNewActions}>

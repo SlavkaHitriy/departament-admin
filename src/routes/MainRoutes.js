@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 // Pages
@@ -10,6 +10,8 @@ import { Account } from '../modules/Account'
 import { NewAccount } from '../modules/NewAccount'
 import { Login } from '../modules/Login'
 import { DeleteAccount } from '../modules/DeleteAccount'
+import { AddTeacher } from '../modules/AddTeacher'
+import { EditTeacher } from '../modules/EditTeacher'
 
 const MainRoutes = () => {
     return (
@@ -19,6 +21,8 @@ const MainRoutes = () => {
             <Route path='/add-new' element={<AddNew/>}/>
             <Route path='/edit-new/:id' element={<EditNew/>}/>
             <Route path='/teachers' element={<Teachers/>}/>
+            <Route path='/add-teacher' element={<AddTeacher/>}/>
+            <Route path='/edit-teacher/:id' element={<EditTeacher/>}/>
             <Route path='/account' element={<Account/>}/>
             <Route path='/new-account' element={<NewAccount/>}/>
             <Route path='/delete-account' element={<DeleteAccount/>}/>

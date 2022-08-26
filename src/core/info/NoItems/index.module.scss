@@ -1,0 +1,10 @@
+@import '/src/assets/styles/vars';
+@import '/src/assets/styles/mixins';
+
+.noItems {
+    font-weight: 600;
+    font-size: 28px;
+    color: $grayDarkest;
+    text-align: center;
+    width: 100%;
+}

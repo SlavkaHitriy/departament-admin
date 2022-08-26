@@ -2,5 +2,35 @@
 @import '../../assets/styles/mixins';
 
 .teachers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 100px 50px;
+}
 
+.teachersItem {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.teachersItemImg {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.teachersItemInfo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    background-color: $white;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 900;
+    text-transform: capitalize;
+    color: $primary;
 }

@@ -6,6 +6,9 @@
     border-radius: 10px;
     border: 1px solid $gray;
     padding: 15px 20px !important;
+    //max-height: 1000px;
+    //overflow-y: auto;
+    //overflow-x: hidden;
 }
 
 .codex-editor--narrow .codex-editor__redactor {
@@ -19,4 +22,18 @@
 
 .cdx-notify__cross::after, .cdx-notify__cross::before {
     left: 4px;
+}
+
+.image-tool__image-picture {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.ce-inline-tool--link + .ce-inline-tool--link {
+    display: none;
+}
+
+.codex-editor__loader{
+    height: 70px !important;
 }

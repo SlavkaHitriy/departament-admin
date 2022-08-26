@@ -15,6 +15,8 @@ import { NewsStore } from '../../store'
 import NewsItem from './NewsItem'
 import { PageWrapper } from '../../core/ui/PageWrapper'
 import { Pagination } from '../../core/ui/Pagination'
+import { Loader } from '../../core/info/Loader'
+import { NoItems } from '../../core/info/NoItems'
 
 export const News = observer(() => {
     const pageSize = 12
@@ -25,7 +27,7 @@ export const News = observer(() => {
 
     const getNews = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/PagedNews?page=${page}&PageSize=${pageSize}`)
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/PagedNews?Page=${page}&PageSize=${pageSize}`)
             const news = await response.json()
             setLoadingData(false)
 
@@ -49,7 +51,7 @@ export const News = observer(() => {
     return (
         <PageWrapper title={'Новини'} addNew>
             {
-                loadingData ? <img src={loader} alt='loader'/> : (
+                loadingData ? <Loader /> : (
                     NewsStore.news.length > 0 ? (
                         <div className={styles.news}>
                             {
@@ -58,11 +60,7 @@ export const News = observer(() => {
                                 ))
                             }
                         </div>
-                    ) : (
-                        <div className={styles.newsNoItems}>
-                            -- немає новин --
-                        </div>
-                    )
+                    ) : <NoItems text={'-- немає новин --'} />
                 )
             }
             {

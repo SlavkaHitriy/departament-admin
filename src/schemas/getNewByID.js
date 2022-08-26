@@ -7,7 +7,8 @@ export const GET_NEW_BY_ID = gql`
             title
             description
             content
-            imageStorageUrl
+            headerImageName
+            headerImageStorageUrl
         }
     }
 `

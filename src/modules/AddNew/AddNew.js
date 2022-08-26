@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { checkErrors } from '../../core/functions/checkErrors'
@@ -25,7 +25,7 @@ export const AddNew = () => {
 
     const inputName = useInput('')
     const inputDesc = useInput('')
-    const textareaDesc = useInput('')
+    const [fullDescContent, setFullDescContent] = useState({})
     const [file, setFile] = useState()
 
     const [errors, setErrors] = useState({})
@@ -33,24 +33,33 @@ export const AddNew = () => {
 
     const addNew = async () => {
         const loadingID = uuidv4()
+        const headerImageData = {}
 
-        if (file)
+        if (file) {
             NotificationsStore.addNotification(loadingID, 'loading', 'Додається новина')
 
-        const res = await fetch(`http://localhost:5000/InsertedNews?title=${inputName.value}&description=${inputDesc.value}&content=${textareaDesc.value}`, {
+            const res = await fetch(`${process.env.REACT_APP_API_HOST}/UploadNewsImage?IsHeaderImage=${true}`, {
+                method: 'POST',
+                body: file,
+            })
+
+            const data = await res.json()
+
+            headerImageData.url = encodeURIComponent(data.file.url)
+            headerImageData.imageName = data.file.imageName
+        }
+
+        const res = await fetch(`${process.env.REACT_APP_API_HOST}/InsertedNews?title=${inputName.value}&description=${inputDesc.value}&content=${encodeURIComponent(JSON.stringify(fullDescContent.blocks))}${headerImageData.url ? `&HeaderImageStorageUrl=${headerImageData.url}` : ''}${headerImageData.imageName ? `&HeaderImageName=${headerImageData.imageName}` : ''}`, {
             method: 'POST',
-            body: file,
         })
 
         if (res.status === 200) {
             const addedNewID = uuidv4()
 
-            inputName.setNewValue('')
-            inputDesc.setNewValue('')
-            textareaDesc.setNewValue('')
-
             NotificationsStore.addNotification(addedNewID, 'success', 'Новина успішно додана')
             NotificationsStore.removeNotification(3000, addedNewID)
+
+            navigate('/news')
         } else {
             const errorID = uuidv4()
 
@@ -66,10 +75,10 @@ export const AddNew = () => {
         const inputsInfo = [
             {el: inputName, errorName: 'newName', errorText: 'Введіть назву новини'},
             {el: inputDesc, errorName: 'shortDesc', errorText: 'Введіть короткий опис'},
-            {el: textareaDesc, errorName: 'fullDesc', errorText: 'Введіть опис'},
+            {el: fullDescContent, object: true, errorName: 'fullDesc', errorText: 'Введіть опис'},
         ]
 
-        if (checkErrors(setErrors, inputsInfo)) return
+        if (await checkErrors(setErrors, inputsInfo)) return
 
         setAddingNew(true)
         await addNew()
@@ -84,7 +93,8 @@ export const AddNew = () => {
                     <Input type={'text'} label={'Короткий опис'} id={'shortDesc'} {...inputDesc}
                            error={errors.shortDesc}/>
                     {/*<Input label={'Детальний опис'} id={'fullDesc'} textarea {...textareaDesc} error={errors.fullDesc}/>*/}
-                    <RichTextEditor label={'Детальний опис'} />
+                    <RichTextEditor label={'Детальний опис'} error={errors.fullDesc}
+                                    setContent={setFullDescContent}/>
                     <UploadFile className={styles.addNewUpload} label={'Прикріпити фото'} setFile={setFile}/>
                     <div className={styles.addNewActions}>
                         <Btn

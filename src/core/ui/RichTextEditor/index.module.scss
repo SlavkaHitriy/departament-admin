@@ -3,6 +3,7 @@
 
 .editor {
     margin: 40px 0;
+    position: relative;
 }
 
 .editorLabel {
@@ -13,5 +14,18 @@
 }
 
 .editorContent {
+    border-radius: 10px;
+}
 
+.editorContentError {
+    border: 1px solid $red;
+}
+
+.editorError {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 5px);
+    color: $red;
+    font-size: 12px;
+    font-weight: 400;
 }

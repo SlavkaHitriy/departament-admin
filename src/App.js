@@ -18,14 +18,14 @@ const App = observer(() => {
 
     const [content, setContent] = useState('')
 
-    useEffect(() => {
-        if (getCookie('access_role')) {
-            setContent('panel')
-        } else {
-            setContent('login')
-            navigate('/login')
-        }
-    }, [AuthStore.isAuth])
+    // useEffect(() => {
+    //     if (getCookie('access_role')) {
+    //         setContent('panel')
+    //     } else {
+    //         setContent('login')
+    //         navigate('/login')
+    //     }
+    // }, [AuthStore.isAuth])
 
     return (
         <div className='app'>

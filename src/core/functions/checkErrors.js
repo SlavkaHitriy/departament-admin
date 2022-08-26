@@ -1,14 +1,19 @@
-export const checkErrors = (setErrors, inputs) => {
+export const checkErrors = async (setErrors, inputs) => {
     const tempErrors = {}
-    setErrors({})
+    await setErrors({})
 
     inputs.forEach(input => {
-        if (!input.el.value)
-            tempErrors[input.errorName] = input.errorText
+        if (input.object) {
+            if (Object.keys(input.el).length === 0)
+                tempErrors[input.errorName] = input.errorText
+        } else {
+            if (!input.el.value)
+                tempErrors[input.errorName] = input.errorText
+        }
     })
 
     if (Object.keys(tempErrors).length > 0) {
-        setErrors({...tempErrors})
+        await setErrors({...tempErrors})
 
         return true
     }

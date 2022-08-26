@@ -14,11 +14,11 @@ import { AuthStore } from '../../../store'
 // Components
 import { Btn } from '../Btn'
 
-export const Header = observer(({title, addNew, account}) => {
+export const Header = observer(({title, addNew, addTeacher, account}) => {
     const navigate = useNavigate()
 
     const logout = async () => {
-        await fetch(`http://localhost:5000/logout`, {
+        await fetch(`${process.env.REACT_APP_API_HOST}/logout`, {
             method: 'POST',
         })
 
@@ -40,6 +40,17 @@ export const Header = observer(({title, addNew, account}) => {
                     >
                         <div className={styles.headerAddNewPlus} />
                         Додати новину
+                    </Link>
+                )
+            }
+            {
+                addTeacher && (
+                    <Link
+                        className={styles.headerAddNew}
+                        to={'/add-teacher'}
+                    >
+                        <div className={styles.headerAddNewPlus} />
+                        Додати викладача
                     </Link>
                 )
             }
